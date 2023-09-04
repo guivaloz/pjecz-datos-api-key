@@ -1,0 +1,26 @@
+@root = {{$dotenv HOST}}
+@baseUrl = {{root}}/v4
+@api_key = {{$dotenv API_KEY}}
+
+### Bienvenida
+GET {{root}}
+
+### Ubicaciones de Expedientes
+GET {{baseUrl}}/ubicaciones_expedientes
+X-Api-Key: {{api_key}}
+
+### Ubicaciones de Expedientes de la autoridad 37
+GET {{baseUrl}}/ubicaciones_expedientes
+    ?autoridad_id=37
+X-Api-Key: {{api_key}}
+
+### Ubicaciones de Expedientes del SLT-J2-CIV
+GET {{baseUrl}}/ubicaciones_expedientes
+    ?autoridad_clave=SLT-J2-CIV
+X-Api-Key: {{api_key}}
+
+### Ubicacion del Expediente 123/2022 en SLT-J2-CIV
+GET {{baseUrl}}/ubicaciones_expedientes
+    ?autoridad_clave=SLT-J2-CIV
+    &expediente=123/2022
+X-Api-Key: {{api_key}}

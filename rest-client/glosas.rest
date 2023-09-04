@@ -1,0 +1,80 @@
+@root = {{$dotenv HOST}}
+@baseUrl = {{root}}/v4
+@api_key = {{$dotenv API_KEY}}
+
+### Bienvenida
+GET {{root}}
+
+### Glosas
+GET {{baseUrl}}/glosas
+X-Api-Key: {{api_key}}
+
+### Reporte diario de Glosas
+GET {{baseUrl}}/glosas/reporte_diario
+    ?creado=2023-08-01
+X-Api-Key: {{api_key}}
+
+### Glosas de la autoridad 106
+GET {{baseUrl}}/glosas
+    ?autoridad_id=106
+X-Api-Key: {{api_key}}
+
+### Glosas del Pleno del Tribunal Constitucional
+GET {{baseUrl}}/glosas
+    ?autoridad_clave=PTC
+X-Api-Key: {{api_key}}
+
+### Glosas del Pleno del Tribunal Constitucional del 2022
+GET {{baseUrl}}/glosas
+    ?autoridad_clave=PTC
+    &anio=2022
+X-Api-Key: {{api_key}}
+
+### Glosas del 2022-07-14
+GET {{baseUrl}}/glosas
+    ?fecha=2022-07-14
+X-Api-Key: {{api_key}}
+
+### Glosas del Pleno del Tribunal Constitucional expediente 5/2021-AIL
+GET {{baseUrl}}/glosas
+    ?autoridad_clave=PTC
+    &expediente=5/2021-AIL
+X-Api-Key: {{api_key}}
+
+### Detalle de la glosa con id 1940
+GET {{baseUrl}}/glosas/1940
+X-Api-Key: {{api_key}}
+
+### Crear una nueva glosa
+POST {{baseUrl}}/glosas
+X-Api-Key: {{api_key}}
+Content-Type: application/json
+
+{
+    "autoridad_id": 106,
+    "fecha": "2023-04-12",
+    "tipo_juicio": "ND",
+    "descripcion": "TOCAS VISTOS EN SESION DE PLENO",
+    "expediente": "12/2023",
+    "archivo": "2023-04-12-12-2023.pdf",
+    "url": "https://storage.googleapis.com/pjecz-consultas/Glosas/Pleno%20del%20Tribunal%20Constitucional/Pleno%20del%20Tribunal%20Constitucional/2023/Abril/2023-04-12-12-2023.pdf"
+}
+
+### Modificar la glosa con id 1940
+PUT {{baseUrl}}/glosas/1940
+X-Api-Key: {{api_key}}
+Content-Type: application/json
+
+{
+    "autoridad_id": 106,
+    "fecha": "2023-04-12",
+    "tipo_juicio": "ND",
+    "descripcion": "ACCION DE INCONSTITUCIONALIDAD",
+    "expediente": "12/2023",
+    "archivo": "2023-04-12-12-2023.pdf",
+    "url": "https://storage.googleapis.com/pjecz-consultas/Glosas/Pleno%20del%20Tribunal%20Constitucional/Pleno%20del%20Tribunal%20Constitucional/2023/Abril/2023-04-12-12-2023.pdf"
+}
+
+### Eliminar la glosa con id 1940
+DELETE {{baseUrl}}/glosas/1940
+X-Api-Key: {{api_key}}

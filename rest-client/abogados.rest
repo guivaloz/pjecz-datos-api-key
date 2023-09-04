@@ -1,0 +1,70 @@
+@root = {{$dotenv HOST}}
+@baseUrl = {{root}}/v4
+@api_key = {{$dotenv API_KEY}}
+
+### Bienvenida
+GET {{root}}
+
+### Abogados
+GET {{baseUrl}}/abogados
+X-Api-Key: {{api_key}}
+
+### Abogados con nombre Garza
+GET {{baseUrl}}/abogados
+    ?nombre=Garza
+X-Api-Key: {{api_key}}
+
+### Abogados con nombre EsteNombreNoExiste
+GET {{baseUrl}}/abogados
+    ?nombre=EsteNombreNoExiste
+X-Api-Key: {{api_key}}
+
+### Abogados con nombre Garza registrados desde 2020
+GET {{baseUrl}}/abogados
+    ?nombre=Garza
+    &anio_desde=2020
+X-Api-Key: {{api_key}}
+
+### Abogados registrados entre 2020 y 2021
+GET {{baseUrl}}/abogados
+    ?anio_desde=2020
+    &anio_hasta=2021
+X-Api-Key: {{api_key}}
+
+### Abogados registrados entre 1800 y 1899
+GET {{baseUrl}}/abogados
+    ?anio_desde=1800
+    &anio_hasta=1899
+X-Api-Key: {{api_key}}
+
+### Abogados detalle del abogado con id 13586
+GET {{baseUrl}}/abogados/13586
+X-Api-Key: {{api_key}}
+
+### Crear un nuevo abogado
+POST {{baseUrl}}/abogados
+X-Api-Key: {{api_key}}
+Content-Type: application/json
+
+{
+    "fecha": "2023-04-11",
+    "numero": "99999",
+    "libro": "XXX",
+    "nombre": "FULANO DE TAL"
+}
+
+### Modificar el nombre de un abogado
+PUT {{baseUrl}}/abogados/13586
+X-Api-Key: {{api_key}}
+Content-Type: application/json
+
+{
+    "fecha": "2020-02-14",
+    "numero": "11913",
+    "libro": "XXII",
+    "nombre": "PERENGANO DE TAL"
+}
+
+### Eliminar el abogado con id 13586
+DELETE {{baseUrl}}/abogados/13586
+X-Api-Key: {{api_key}}

@@ -1,0 +1,89 @@
+@root = {{$dotenv HOST}}
+@baseUrl = {{root}}/v4
+@api_key = {{$dotenv API_KEY}}
+
+### Bienvenida
+GET {{root}}
+
+### Audiencias
+GET {{baseUrl}}/audiencias
+X-Api-Key: {{api_key}}
+
+### Audiencias de la autoridad 37
+GET {{baseUrl}}/audiencias
+    ?autoridad_id=37
+X-Api-Key: {{api_key}}
+
+### Audiencias de la autoridad MNC-J2-CIV
+GET {{baseUrl}}/audiencias
+    ?autoridad_clave=MNC-J2-CIV
+X-Api-Key: {{api_key}}
+
+### Audiencias de la autoridad MNC-J2-CIV del anio 2021
+GET {{baseUrl}}/audiencias
+    ?autoridad_clave=MNC-J2-CIV
+    &anio=2021
+X-Api-Key: {{api_key}}
+
+### Audiencias de la autoridad MNC-J2-CIV de 2021-04-26
+GET {{baseUrl}}/audiencias
+    ?autoridad_clave=MNC-J2-CIV
+    &fecha=2021-04-26
+X-Api-Key: {{api_key}}
+
+### Audiencias del Distrito de Monclova
+GET {{baseUrl}}/audiencias
+    ?distrito_clave=DMNC
+    &fecha=2021-04-26
+X-Api-Key: {{api_key}}
+
+### Detalle de la audiencia con id 171970
+GET {{baseUrl}}/audiencias/171970
+X-Api-Key: {{api_key}}
+
+### Crear una nueva audiencia
+POST {{baseUrl}}/audiencias
+X-Api-Key: {{api_key}}
+Content-Type: application/json
+
+{
+    "autoridad_id": 8,
+    "tiempo": "2023-04-12T14:00:00",
+    "tipo_audiencia": "PREVIA CONTESTADA",
+    "expediente": "123/2023",
+    "actores": "FULANO DE TAL",
+    "demandados": "PERENGANO DE TAL",
+    "sala": "",
+    "caracter": "NO DEFINIDO",
+    "causa_penal": "",
+    "delitos": "",
+    "toca": "",
+    "expediente_origen": "",
+    "imputados": "",
+    "origen": ""
+}
+
+### Modificar la audiencia con id 171970
+PUT {{baseUrl}}/audiencias/171970
+X-Api-Key: {{api_key}}
+Content-Type: application/json
+
+{
+    "tiempo": "2023-04-14T14:00:00",
+    "tipo_audiencia": "PREVIA CONTESTADA",
+    "expediente": "123/2023",
+    "actores": "SEGUNDO FULANO DE TAL",
+    "demandados": "SEGUNDO PERENGANO DE TAL",
+    "sala": "",
+    "caracter": "NO DEFINIDO",
+    "causa_penal": "",
+    "delitos": "",
+    "toca": "",
+    "expediente_origen": "",
+    "imputados": "",
+    "origen": ""
+}
+
+### Eliminar la audiencia con id 171970
+DELETE {{baseUrl}}/audiencias/171970
+X-Api-Key: {{api_key}}

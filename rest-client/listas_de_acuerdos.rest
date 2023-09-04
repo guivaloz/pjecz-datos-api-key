@@ -1,0 +1,77 @@
+@root = {{$dotenv HOST}}
+@baseUrl = {{root}}/v4
+@api_key = {{$dotenv API_KEY}}
+
+### Bienvenida
+GET {{root}}
+
+### Listas de Acuerdos
+GET {{baseUrl}}/listas_de_acuerdos
+X-Api-Key: {{api_key}}
+
+### Reporte Diario de Listas de Acuerdos
+GET {{baseUrl}}/listas_de_acuerdos/reporte_diario
+    ?creado=2023-08-01
+X-Api-Key: {{api_key}}
+
+### Listas de Acuerdos de la autoridad 37
+GET {{baseUrl}}/listas_de_acuerdos
+    ?autoridad_id=37
+X-Api-Key: {{api_key}}
+
+### Listas de Acuerdos del SLT-J2-CIV
+GET {{baseUrl}}/listas_de_acuerdos
+    ?autoridad_clave=SLT-J2-CIV
+X-Api-Key: {{api_key}}
+
+### Listas de Acuerdos del SLT-J2-CIV del 2021
+GET {{baseUrl}}/listas_de_acuerdos
+    ?autoridad_clave=SLT-J2-CIV
+    &anio=2021
+X-Api-Key: {{api_key}}
+
+### Listas de Acuerdos del SLT-J2-CIV del 2021-04-26
+GET {{baseUrl}}/listas_de_acuerdos
+    ?autoridad_clave=SLT-J2-CIV
+    &fecha=2021-04-26
+X-Api-Key: {{api_key}}
+
+### Listas de Acuerdos del Distrito de Monclova DMC del 2021-04-26
+GET {{baseUrl}}/listas_de_acuerdos
+    ?distrito_clave=DMNC
+    &fecha=2021-04-26
+X-Api-Key: {{api_key}}
+
+### Lista de Acuerdos con id 114261
+GET {{baseUrl}}/listas_de_acuerdos/114261
+X-Api-Key: {{api_key}}
+
+### Crear una nueva lista de acuerdos
+POST {{baseUrl}}/listas_de_acuerdos
+X-Api-Key: {{api_key}}
+Content-Type: application/json
+
+{
+    "autoridad_id": 37,
+    "fecha": "2021-04-26",
+    "descripcion": "LISTA DE ACUERDO DEL SLT-J2-CIV DEL 2021-04-26",
+    "archivo": "example.pdf",
+    "url": "https://example.com/example.pdf"
+}
+
+### Modificar la lista de acuerdos con id 114261
+PUT {{baseUrl}}/listas_de_acuerdos/114261
+X-Api-Key: {{api_key}}
+Content-Type: application/json
+
+{
+    "autoridad_id": 37,
+    "fecha": "2021-04-26",
+    "descripcion": "Lista de Acuerdos del SLT-J2-CIV del 2021-04-26",
+    "archivo": "example2.pdf",
+    "url": "https://example.com/example2.pdf"
+}
+
+### Eliminar la lista de acuerdos con id 114261
+DELETE {{baseUrl}}/listas_de_acuerdos/114261
+X-Api-Key: {{api_key}}

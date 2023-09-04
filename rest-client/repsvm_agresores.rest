@@ -1,0 +1,25 @@
+@root = {{$dotenv HOST}}
+@baseUrl = {{root}}/v4
+@api_key = {{$dotenv API_KEY}}
+
+### Bienvenida
+GET {{root}}
+
+### REPSVM Agresores
+GET {{baseUrl}}/repsvm_agresores
+X-Api-Key: {{api_key}}
+
+### REPSVM Agresores con nombre Luis
+GET {{baseUrl}}/repsvm_agresores
+    ?nombre=Luis
+X-Api-Key: {{api_key}}
+
+### REPSVM Agresores con un nombre que no existe
+GET {{baseUrl}}/repsvm_agresores
+    ?nombre=EsteNombreNOExiste
+X-Api-Key: {{api_key}}
+
+### REPSVM Agresores del distrito DRGR
+GET {{baseUrl}}/repsvm_agresores
+    ?distrito_clave=DRGR
+X-Api-Key: {{api_key}}

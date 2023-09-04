@@ -1,0 +1,48 @@
+@root = {{$dotenv HOST}}
+@baseUrl = {{root}}/v4
+@api_key = {{$dotenv API_KEY}}
+
+### Bienvenida
+GET {{root}}
+
+### Tipos de Peritos
+GET {{baseUrl}}/peritos_tipos
+X-Api-Key: {{api_key}}
+
+### Tipo de Perito CRIMINOLOGIA
+GET {{baseUrl}}/peritos_tipos/14
+X-Api-Key: {{api_key}}
+
+### Peritos
+GET {{baseUrl}}/peritos
+X-Api-Key: {{api_key}}
+
+### Peritos con tipo CRIMINOLOGIA 14
+GET {{baseUrl}}/peritos
+    ?perito_tipo_id=14
+X-Api-Key: {{api_key}}
+
+### Peritos con nombre Luis
+GET {{baseUrl}}/peritos
+    ?nombre=Luis
+X-Api-Key: {{api_key}}
+
+### Peritos con nombre EsteNombreNoExiste
+GET {{baseUrl}}/peritos
+    ?nombre=EsteNombreNoExiste
+X-Api-Key: {{api_key}}
+
+### Peritos del Distrito de Saltillo DSLT
+GET {{baseUrl}}/peritos
+    ?distrito_clave=DSLT
+X-Api-Key: {{api_key}}
+
+### Peritos del Distrito de Saltillo DSLT con nombre Luis
+GET {{baseUrl}}/peritos
+    ?distrito_clave=DSLT
+    &nombre=Luis
+X-Api-Key: {{api_key}}
+
+### Perito con id 474
+GET {{baseUrl}}/peritos/474
+X-Api-Key: {{api_key}}
