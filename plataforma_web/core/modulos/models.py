@@ -25,7 +25,6 @@ class Modulo(Base, UniversalMixin):
     en_navegacion = Column(Boolean, nullable=False, default=True)
 
     # Hijos
-    bitacoras = relationship("Bitacora", back_populates="modulo")
     permisos = relationship("Permiso", back_populates="modulo")
 
     def __repr__(self):

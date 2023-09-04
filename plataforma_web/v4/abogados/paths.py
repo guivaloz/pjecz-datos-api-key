@@ -10,11 +10,10 @@ from lib.database import Session, get_db
 from lib.exceptions import MyAnyError
 from lib.fastapi_pagination_custom_page import CustomPage
 
-from ...core.abogados.models import Abogado
 from ...core.permisos.models import Permiso
 from ..usuarios.authentications import UsuarioInDB, get_current_active_user
-from .crud import create_abogado, delete_abogado, get_abogado, get_abogados, update_abogado
-from .schemas import AbogadoIn, AbogadoOut, OneAbogadoOut
+from .crud import get_abogado, get_abogados
+from .schemas import AbogadoOut, OneAbogadoOut
 
 abogados = APIRouter(prefix="/v4/abogados", tags=["abogados"])
 
@@ -56,58 +55,3 @@ async def detalle_abogado(
     except MyAnyError as error:
         return OneAbogadoOut(success=False, message=str(error))
     return OneAbogadoOut.model_validate(abogado)
-
-
-@abogados.post("", response_model=OneAbogadoOut)
-async def crear_abogado(
-    current_user: Annotated[UsuarioInDB, Depends(get_current_active_user)],
-    database: Annotated[Session, Depends(get_db)],
-    abogado_in: AbogadoIn,
-):
-    """Crear un abogado"""
-    if current_user.permissions.get("ABOGADOS", 0) < Permiso.CREAR:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden")
-    try:
-        abogado = create_abogado(database, Abogado(**abogado_in.model_dump()))
-    except MyAnyError as error:
-        return OneAbogadoOut(success=False, message=str(error))
-    respuesta = OneAbogadoOut.model_validate(abogado)
-    respuesta.message = "Abogado creado correctamente"
-    return respuesta
-
-
-@abogados.put("/{abogado_id}", response_model=OneAbogadoOut)
-async def modificar_abogado(
-    current_user: Annotated[UsuarioInDB, Depends(get_current_active_user)],
-    database: Annotated[Session, Depends(get_db)],
-    abogado_id: int,
-    abogado_in: AbogadoIn,
-):
-    """Modificar un abogado a partir de su id"""
-    if current_user.permissions.get("ABOGADOS", 0) < Permiso.MODIFICAR:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden")
-    try:
-        abogado = update_abogado(database, abogado_id, Abogado(**abogado_in.model_dump()))
-    except MyAnyError as error:
-        return OneAbogadoOut(success=False, message=str(error))
-    respuesta = OneAbogadoOut.model_validate(abogado)
-    respuesta.message = "Abogado actualizado correctamente"
-    return respuesta
-
-
-@abogados.delete("/{abogado_id}", response_model=OneAbogadoOut)
-async def borrar_abogado(
-    current_user: Annotated[UsuarioInDB, Depends(get_current_active_user)],
-    database: Annotated[Session, Depends(get_db)],
-    abogado_id: int,
-):
-    """Borrar un abogado a partir de su id"""
-    if current_user.permissions.get("ABOGADOS", 0) < Permiso.BORRAR:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden")
-    try:
-        abogado = delete_abogado(database, abogado_id)
-    except MyAnyError as error:
-        return OneAbogadoOut(success=False, message=str(error))
-    respuesta = OneAbogadoOut.model_validate(abogado)
-    respuesta.message = "Abogado borrado correctamente"
-    return respuesta

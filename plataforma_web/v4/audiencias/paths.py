@@ -11,11 +11,10 @@ from lib.database import Session, get_db
 from lib.exceptions import MyAnyError
 from lib.fastapi_pagination_custom_page import CustomPage
 
-from ...core.audiencias.models import Audiencia
 from ...core.permisos.models import Permiso
 from ..usuarios.authentications import UsuarioInDB, get_current_active_user
-from .crud import create_audiencia, delete_audiencia, get_audiencia, get_audiencias, update_audiencia
-from .schemas import AudienciaIn, AudienciaOut, OneAudienciaOut
+from .crud import get_audiencia, get_audiencias
+from .schemas import AudienciaOut, OneAudienciaOut
 
 audiencias = APIRouter(prefix="/v4/audiencias", tags=["audiencias"])
 
@@ -69,58 +68,3 @@ async def detalle_audiencia(
     except MyAnyError as error:
         return OneAudienciaOut(success=False, message=str(error))
     return OneAudienciaOut.model_validate(audiencia)
-
-
-@audiencias.post("", response_model=OneAudienciaOut)
-async def crear_audiencia(
-    current_user: Annotated[UsuarioInDB, Depends(get_current_active_user)],
-    database: Annotated[Session, Depends(get_db)],
-    audiencia_in: AudienciaIn,
-):
-    """Crear una audiencia"""
-    if current_user.permissions.get("AUDIENCIAS", 0) < Permiso.CREAR:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden")
-    try:
-        audiencia = create_audiencia(database, Audiencia(**audiencia_in.model_dump()))
-    except MyAnyError as error:
-        return OneAudienciaOut(success=False, message=str(error))
-    respuesta = OneAudienciaOut.model_validate(audiencia)
-    respuesta.message = "Audiencia creada correctamente"
-    return respuesta
-
-
-@audiencias.put("/{audiencia_id}", response_model=OneAudienciaOut)
-async def modificar_audiencia(
-    current_user: Annotated[UsuarioInDB, Depends(get_current_active_user)],
-    database: Annotated[Session, Depends(get_db)],
-    audiencia_id: int,
-    audiencia_in: AudienciaIn,
-):
-    """Modificar una audiencia"""
-    if current_user.permissions.get("AUDIENCIAS", 0) < Permiso.MODIFICAR:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden")
-    try:
-        audiencia = update_audiencia(database, audiencia_id, Audiencia(**audiencia_in.model_dump()))
-    except MyAnyError as error:
-        return OneAudienciaOut(success=False, message=str(error))
-    respuesta = OneAudienciaOut.model_validate(audiencia)
-    respuesta.message = "Audiencia actualizada correctamente"
-    return respuesta
-
-
-@audiencias.delete("/{audiencia_id}", response_model=OneAudienciaOut)
-async def borrar_audiencia(
-    current_user: Annotated[UsuarioInDB, Depends(get_current_active_user)],
-    database: Annotated[Session, Depends(get_db)],
-    audiencia_id: int,
-):
-    """Borrar una audiencia"""
-    if current_user.permissions.get("AUDIENCIAS", 0) < Permiso.MODIFICAR:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden")
-    try:
-        audiencia = delete_audiencia(database, audiencia_id)
-    except MyAnyError as error:
-        return OneAudienciaOut(success=False, message=str(error))
-    respuesta = OneAudienciaOut.model_validate(audiencia)
-    respuesta.message = "Audiencia borrada correctamente"
-    return respuesta

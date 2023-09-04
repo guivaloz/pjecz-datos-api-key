@@ -34,9 +34,7 @@ class Domicilio(Base, UniversalMixin):
     numeracion_telefonica = Column(String(256), nullable=False)
 
     # Hijos
-    centros_trabajos = relationship("CentroTrabajo", back_populates="domicilio")
     oficinas = relationship("Oficina", back_populates="domicilio")
-    siga_salas = relationship("SIGASala", back_populates="domicilio")
 
     @property
     def distrito_clave(self):
