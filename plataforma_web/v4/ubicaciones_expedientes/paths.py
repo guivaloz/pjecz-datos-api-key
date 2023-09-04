@@ -12,7 +12,6 @@ from lib.exceptions import MyAnyError
 from lib.fastapi_pagination_custom_page import CustomPage
 
 from ...core.permisos.models import Permiso
-from ...core.ubicaciones_expedientes.models import UbicacionExpediente
 from ..usuarios.authentications import UsuarioInDB, get_current_active_user
 from .crud import get_ubicacion_expediente, get_ubicaciones_expedientes
 from .schemas import OneUbicacionExpedienteOut, UbicacionExpedienteOut

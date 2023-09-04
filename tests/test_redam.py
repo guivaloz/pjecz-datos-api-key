@@ -14,7 +14,7 @@ class TestREDAM(unittest.TestCase):
     def test_get_redam(self):
         """Test GET method for redam"""
         response = requests.get(
-            f"{config['host']}/v4/redam",
+            f"{config['api_base_url']}/redam",
             headers={"X-Api-Key": config["api_key"]},
             timeout=config["timeout"],
         )
@@ -23,7 +23,7 @@ class TestREDAM(unittest.TestCase):
     def test_get_redam_by_distrito_id_6(self):
         """Test GET method for redam by distrito_id 6"""
         response = requests.get(
-            f"{config['host']}/v4/redam",
+            f"{config['api_base_url']}/redam",
             headers={"X-Api-Key": config["api_key"]},
             params={"distrito_id": 6},
             timeout=config["timeout"],
@@ -37,7 +37,7 @@ class TestREDAM(unittest.TestCase):
     def test_get_redam_by_distrito_id_6_by_nombre(self):
         """Test GET method for redam by distrito_id 6 by nombre LUIS"""
         response = requests.get(
-            f"{config['host']}/v4/redam",
+            f"{config['api_base_url']}/redam",
             headers={"X-Api-Key": config["api_key"]},
             params={"distrito_id": 6, "nombre": "LUIS"},
             timeout=config["timeout"],
@@ -52,7 +52,7 @@ class TestREDAM(unittest.TestCase):
     def test_get_redam_by_distrito_clave_dtrc(self):
         """Test GET method for redam by distrito_clave DTRC"""
         response = requests.get(
-            f"{config['host']}/v4/redam",
+            f"{config['api_base_url']}/redam",
             headers={"X-Api-Key": config["api_key"]},
             params={"distrito_clave": "DTRC"},
             timeout=config["timeout"],
@@ -66,7 +66,7 @@ class TestREDAM(unittest.TestCase):
     def test_get_redam_by_distrito_clave_dtrc_by_nombre(self):
         """Test GET method for redam by distrito_clave DTRC by nombre LUIS"""
         response = requests.get(
-            f"{config['host']}/v4/redam",
+            f"{config['api_base_url']}/redam",
             headers={"X-Api-Key": config["api_key"]},
             params={"distrito_clave": "DTRC", "nombre": "LUIS"},
             timeout=config["timeout"],

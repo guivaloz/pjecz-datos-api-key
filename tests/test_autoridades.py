@@ -14,7 +14,7 @@ class TestAutoridades(unittest.TestCase):
     def test_get_autoridades(self):
         """Test GET method for autoridades"""
         response = requests.get(
-            f"{config['host']}/v4/autoridades",
+            f"{config['api_base_url']}/autoridades",
             headers={"X-Api-Key": config["api_key"]},
             timeout=config["timeout"],
         )
@@ -23,7 +23,7 @@ class TestAutoridades(unittest.TestCase):
     def test_get_autoridades_by_es_cemasc(self):
         """Test GET method for autoridades by es_cemasc"""
         response = requests.get(
-            f"{config['host']}/v4/autoridades",
+            f"{config['api_base_url']}/autoridades",
             headers={"X-Api-Key": config["api_key"]},
             params={"es_cemasc": 1},
             timeout=config["timeout"],
@@ -37,7 +37,7 @@ class TestAutoridades(unittest.TestCase):
     def test_get_autoridades_by_es_creador_glosas(self):
         """Test GET method for autoridades by es_creador_glosas"""
         response = requests.get(
-            f"{config['host']}/v4/autoridades",
+            f"{config['api_base_url']}/autoridades",
             headers={"X-Api-Key": config["api_key"]},
             params={"es_creador_glosas": 1},
             timeout=config["timeout"],
@@ -51,7 +51,7 @@ class TestAutoridades(unittest.TestCase):
     def test_get_autoridades_by_es_defensoria(self):
         """Test GET method for autoridades by es_defensoria"""
         response = requests.get(
-            f"{config['host']}/v4/autoridades",
+            f"{config['api_base_url']}/autoridades",
             headers={"X-Api-Key": config["api_key"]},
             params={"es_defensoria": 1},
             timeout=config["timeout"],
@@ -65,7 +65,7 @@ class TestAutoridades(unittest.TestCase):
     def test_get_autoridades_by_es_jurisdiccional(self):
         """Test GET method for autoridades by es_jurisdiccional"""
         response = requests.get(
-            f"{config['host']}/v4/autoridades",
+            f"{config['api_base_url']}/autoridades",
             headers={"X-Api-Key": config["api_key"]},
             params={"es_jurisdiccional": 1},
             timeout=config["timeout"],
@@ -79,7 +79,7 @@ class TestAutoridades(unittest.TestCase):
     def test_get_autoridades_by_es_notaria(self):
         """Test GET method for autoridades by es_notaria"""
         response = requests.get(
-            f"{config['host']}/v4/autoridades",
+            f"{config['api_base_url']}/autoridades",
             headers={"X-Api-Key": config["api_key"]},
             params={"es_notaria": 1},
             timeout=config["timeout"],

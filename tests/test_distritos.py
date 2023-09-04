@@ -14,7 +14,7 @@ class TestDistritos(unittest.TestCase):
     def test_get_distritos(self):
         """Test GET method for distritos"""
         response = requests.get(
-            f"{config['host']}/v4/distritos",
+            f"{config['api_base_url']}/distritos",
             headers={"X-Api-Key": config["api_key"]},
             timeout=config["timeout"],
         )
@@ -23,7 +23,7 @@ class TestDistritos(unittest.TestCase):
     def test_get_distritos_by_es_distrito_judicial(self):
         """Test GET method for distritos by es_distrito_judicial"""
         response = requests.get(
-            f"{config['host']}/v4/distritos",
+            f"{config['api_base_url']}/distritos",
             headers={"X-Api-Key": config["api_key"]},
             params={"es_distrito_judicial": 1},
             timeout=config["timeout"],
@@ -37,7 +37,7 @@ class TestDistritos(unittest.TestCase):
     def test_get_distritos_by_es_distrito(self):
         """Test GET method for distritos by es_distrito"""
         response = requests.get(
-            f"{config['host']}/v4/distritos",
+            f"{config['api_base_url']}/distritos",
             headers={"X-Api-Key": config["api_key"]},
             params={"es_distrito": 1},
             timeout=config["timeout"],
@@ -51,7 +51,7 @@ class TestDistritos(unittest.TestCase):
     def test_get_distritos_by_es_jurisdiccional(self):
         """Test GET method for distritos by es_jurisdiccional"""
         response = requests.get(
-            f"{config['host']}/v4/distritos",
+            f"{config['api_base_url']}/distritos",
             headers={"X-Api-Key": config["api_key"]},
             params={"es_jurisdiccional": 1},
             timeout=config["timeout"],

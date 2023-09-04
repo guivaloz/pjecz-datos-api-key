@@ -14,7 +14,7 @@ class TestMaterias(unittest.TestCase):
     def test_get_materias(self):
         """Test GET method for materias"""
         response = requests.get(
-            f"{config['host']}/v4/materias",
+            f"{config['api_base_url']}/materias",
             headers={"X-Api-Key": config["api_key"]},
             timeout=config["timeout"],
         )
@@ -23,7 +23,7 @@ class TestMaterias(unittest.TestCase):
     def test_get_materias_tipos_juicios(self):
         """Test GET method for materias_tipos_juicios"""
         response = requests.get(
-            f"{config['host']}/v4/materias_tipos_juicios",
+            f"{config['api_base_url']}/materias_tipos_juicios",
             headers={"X-Api-Key": config["api_key"]},
             timeout=config["timeout"],
         )
