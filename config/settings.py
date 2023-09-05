@@ -14,11 +14,6 @@ con las siguientes variables:
 - DB_NAME
 - DB_PASS
 - DB_USER
-- GCP_BUCKET
-- GCP_BUCKET_EDICTOS
-- GCP_BUCKET_GLOSAS
-- GCP_BUCKET_LISTAS_DE_ACUERDOS
-- GCP_BUCKET_SENTENCIAS
 - ORIGINS
 - SALT
 
@@ -31,11 +26,6 @@ y cree como secretos las siguientes variable de entorno
 - pjecz_datos_api_key_db_name
 - pjecz_datos_api_key_db_pass
 - pjecz_datos_api_key_db_user
-- pjecz_datos_api_key_gcp_bucket
-- pjecz_datos_api_key_gcp_bucket_edictos
-- pjecz_datos_api_key_gcp_bucket_glosas
-- pjecz_datos_api_key_gcp_bucket_listas_de_acuerdos
-- pjecz_datos_api_key_gcp_bucket_sentencias
 - pjecz_datos_api_key_origins
 - pjecz_datos_api_key_salt
 
@@ -83,11 +73,6 @@ class Settings(BaseSettings):
     db_name: str = get_secret("db_name")
     db_pass: str = get_secret("db_pass")
     db_user: str = get_secret("db_user")
-    gcp_bucket: str = get_secret("gcp_bucket")
-    gcp_bucket_edictos: str = get_secret("gcp_bucket_edictos")
-    gcp_bucket_glosas: str = get_secret("gcp_bucket_glosas")
-    gcp_bucket_listas_de_acuerdos: str = get_secret("gcp_bucket_listas_de_acuerdos")
-    gcp_bucket_sentencias: str = get_secret("gcp_bucket_sentencias")
     origins: str = get_secret("origins")
     salt: str = get_secret("salt")
     tz: str = "America/Mexico_City"
